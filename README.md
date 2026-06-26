@@ -1,11 +1,18 @@
 <h1 align="center">SQL Design</h1>
 
 <p align="center">
-
-[![Agent: Skill](https://img.shields.io/badge/Agent-Skill-blue.svg)](https://github.com/claudeai/claude-agent/tree/main/skills/sql-design/README.md#agent-skill-usage)
-[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-12%2B-blue)](https://www.postgresql.org/)
-[![MySQL](https://img.shields.io/badge/MySQL-8%2B-blue)](https://www.mysql.com/)
-[![Oracle](https://img.shields.io/badge/Oracle-12%2B-blue)](https://www.oracle.com/database/)
+<a href="https://github.com/claudeai/claude-agent/tree/main/skills/sql-design/README.md#agent-skill-usage">
+<img src="https://img.shields.io/badge/Agent-Skill-blue.svg" alt="Agent Skill" width="120" height="30">
+</a>
+<a href="https://www.postgresql.org/">
+<img src="https://img.shields.io/badge/PostgreSQL-12%2B-blue" alt="PostgreSQL" width="120" height="30">
+</a>
+<a href="https://www.mysql.com/">
+<img src="https://img.shields.io/badge/MySQL-8%2B-blue" alt="MySQL" width="120" height="30">
+</a>
+<a href="https://www.oracle.com/database/">
+<img src="https://img.shields.io/badge/Oracle-12%2B-blue" alt="Oracle" width="120" height="30">
+</a>
 
 </p>
 
