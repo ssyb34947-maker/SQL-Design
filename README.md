@@ -1,8 +1,7 @@
 # SQL Design
 
-SQL Design 是一个开源的企业级 SQL 设计与优化 Skill，面向 Claude Code、Codex 等编码 Agent 使用。
-
-它不是应用产品，也不是 SaaS 平台，而是一组可以放进开发者本地 Agent 工作流的技能文件、参考资料和辅助脚本。目标是让 Agent 在写 SQL、审查 SQL、设计表结构、构建索引、处理 ORM、规避 SQL 注入和规划数据库变更时，更接近企业级后端工程师和数据库工程师的工作方式。
+SQL Design 是一个 SQL 设计与优化 Skill，面向 Claude Code、Codex 等编码 Agent 使用。
+目标是让 Agent 在写 SQL、审查 SQL、设计表结构、构建索引、处理 ORM、规避 SQL 注入和规划数据库变更时，更接近企业级后端工程师和数据库工程师的工作方式。
 
 ## 为什么需要它
 
@@ -139,4 +138,3 @@ scripts/normalize_explain.py --database auto --format json path/to/plan.txt
 - 验证方案。
 - 回滚方案。
 
-它不要求 Agent 暴露完整链式思维，而是要求 Agent 使用结构化流程分析，并输出简洁、可复核、能落地的结论。
