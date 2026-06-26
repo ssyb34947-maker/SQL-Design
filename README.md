@@ -1,10 +1,12 @@
 <h1 align="center">SQL Design</h1>
 
 <p align="center">
+
 [![Agent: Skill](https://img.shields.io/badge/Agent-Skill-blue.svg)](https://github.com/claudeai/claude-agent/tree/main/skills/sql-design/README.md#agent-skill-usage)
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-12%2B-blue)](https://www.postgresql.org/)
 [![MySQL](https://img.shields.io/badge/MySQL-8%2B-blue)](https://www.mysql.com/)
 [![Oracle](https://img.shields.io/badge/Oracle-12%2B-blue)](https://www.oracle.com/database/)
+
 </p>
 
 SQL Design 是一个面向 **企业级生产环境** 的 SQL 设计与优化 Skill，专为 Claude Code、Codex 等编码 Agent 打造。
