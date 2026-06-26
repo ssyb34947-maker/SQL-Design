@@ -1,0 +1,6 @@
+interface:
+  display_name: "SQL Design"
+  short_description: "Enterprise SQL design and optimization guidance"
+  default_prompt: "Use $sql-design to design, review, optimize, and safely ship SQL or database changes."
+policy:
+  allow_implicit_invocation: true
