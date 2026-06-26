@@ -1,10 +1,12 @@
-# SQL Design
-
+<center>SQL Design</center>
+<br>
+<center>
 [![Agent: Skill](https://img.shields.io/badge/Agent-Skill-blue.svg)](https://github.com/claudeai/claude-agent/tree/main/skills/sql-design/README.md#agent-skill-usage)
-[![Python Version](https://img.shields.io/badge/python-3.8%2B-blue)](https://www.python.org/downloads/)
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-12%2B-blue)](https://www.postgresql.org/)
 [![MySQL](https://img.shields.io/badge/MySQL-8%2B-blue)](https://www.mysql.com/)
-
+[![Oracle](https://img.shields.io/badge/Oracle-12%2B-blue)](https://www.oracle.com/database/)
+</center>
+<br>
 SQL Design 是一个面向 **企业级生产环境** 的 SQL 设计与优化 Skill，专为 Claude Code、Codex 等编码 Agent 打造。
 
 > 让 AI 写的 SQL 不仅能跑通，更能**稳定上线**。
