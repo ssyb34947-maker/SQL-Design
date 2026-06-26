@@ -1,140 +1,154 @@
 # SQL Design
 
-SQL Design 是一个 SQL 设计与优化 Skill，面向 Claude Code、Codex 等编码 Agent 使用。
-目标是让 Agent 在写 SQL、审查 SQL、设计表结构、构建索引、处理 ORM、规避 SQL 注入和规划数据库变更时，更接近企业级后端工程师和数据库工程师的工作方式。
+[![Agent: Skill](https://img.shields.io/badge/Agent-Skill-blue.svg)](https://github.com/claudeai/claude-agent/tree/main/skills/sql-design/README.md#agent-skill-usage)
+[![Python Version](https://img.shields.io/badge/python-3.8%2B-blue)](https://www.python.org/downloads/)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-12%2B-blue)](https://www.postgresql.org/)
+[![MySQL](https://img.shields.io/badge/MySQL-8%2B-blue)](https://www.mysql.com/)
 
-## 为什么需要它
+SQL Design 是一个面向 **企业级生产环境** 的 SQL 设计与优化 Skill，专为 Claude Code、Codex 等编码 Agent 打造。
 
-编码 Agent 很容易写出本地 Demo 可用的 SQL：
+> 让 AI 写的 SQL 不仅能跑通，更能**稳定上线**。
 
-- 表能建好。
-- 数据能插入。
-- 查询能返回正确结果。
+## 核心价值
 
-但生产环境还需要更多东西：性能、安全、索引、事务、锁、版本控制、迁移、回滚、可观测性和高并发下的稳定性。
+| 维度 | Demo 级 SQL | 生产级 SQL（SQL Design 赋能） |
+|------|------------|----------------------------|
+| **性能** | 能查就行 | 索引优化、执行计划分析、查询改写 |
+| **安全** | 无防护 | SQL 注入防护、租户隔离检查 |
+| **稳定性** | 单机可用 | 事务、锁、死锁风险审查 |
+| **可维护** | 无版本控制 | 迁移脚本、版本管理、回滚规划 |
+| **可观测** | 无监控 | 执行计划归一化、性能基线 |
 
-SQL Design 的作用是把这些生产级约束沉淀为一个可复用的开源 Skill，让开发者在 Claude Code、Codex 等工具里直接调用。
+## 能力覆盖
 
-## 能力范围
+### 数据库支持
+- **PostgreSQL** - 优先支持，深度优化
+- **MySQL** - 完整兼容指导
+- **Oracle** - 企业级特性支持
 
-- PostgreSQL 优先的 SQL 设计与优化。
-- MySQL 和 Oracle 兼容指导。
-- 已有 SQL、表结构、索引、执行计划的优化分析。
-- 需求阶段的表结构、约束、索引、SQL、ORM 和迁移设计。
-- 主流索引设计原则和生产上线风险。
-- 执行计划分析。
-- SQL 改写模式。
-- SQL 注入防护和安全动态 SQL。
-- Java、Python、Node.js、Go、.NET 常见 ORM 技术栈指导。
-- 事务、锁、死锁和高并发风险审查。
-- 数据库迁移版本控制、验证和回滚规划。
+### 核心功能
+- ✅ **表结构设计** - 约束、范式、分区策略
+- ✅ **索引优化** - B-Tree、GIN、GiST、覆盖索引
+- ✅ **执行计划分析** - 全表扫描、排序、临时表识别
+- ✅ **SQL 改写** - 子查询优化、JOIN 策略、分页优化
+- ✅ **安全审计** - SQL 注入检测、动态 SQL 风险
+- ✅ **ORM 指导** - Java/Python/Node.js/Go/.NET 技术栈
+- ✅ **并发控制** - 事务隔离、锁竞争、死锁预防
+- ✅ **迁移管理** - 版本控制、验证、回滚规划
 
-## 目录结构
+## 项目结构
 
 ```text
 sql-design/
-├── SKILL.md
+├── SKILL.md                          # Skill 入口（纲要、触发、资源导航）
 ├── agents/
-│   └── openai.yaml
-├── references/
-│   ├── sop.md
-│   ├── intake-checklist.md
-│   ├── database-selection.md
-│   ├── postgresql.md
-│   ├── mysql.md
-│   ├── oracle.md
-│   ├── schema-design.md
-│   ├── index-design.md
-│   ├── query-rewrite.md
-│   ├── execution-plan.md
-│   ├── orm-and-application-stack.md
-│   ├── sql-injection-security.md
-│   ├── transaction-locking.md
-│   ├── migration-version-control.md
-│   ├── performance-testing.md
-│   ├── enterprise-report-template.md
-│   └── anti-patterns.md
-└── scripts/
-    ├── checklist_generator.py
-    ├── normalize_explain.py
-    └── sql_static_lint.py
+│   └── openai.yaml                   # OpenAI Agent 配置
+├── references/                       # 详细知识库
+│   ├── sop.md                        # 标准作业流程
+│   ├── intake-checklist.md           # 需求采集清单
+│   ├── database-selection.md         # 数据库选型指南
+│   ├── postgresql.md / mysql.md / oracle.md  # 各数据库特性
+│   ├── schema-design.md              # 表结构设计规范
+│   ├── index-design.md               # 索引设计原则
+│   ├── query-rewrite.md              # SQL 改写模式
+│   ├── execution-plan.md             # 执行计划分析
+│   ├── orm-and-application-stack.md  # ORM 技术栈
+│   ├── sql-injection-security.md     # SQL 注入防护
+│   ├── transaction-locking.md        # 事务与锁
+│   ├── migration-version-control.md  # 迁移版本控制
+│   ├── performance-testing.md        # 性能测试
+│   ├── enterprise-report-template.md # 企业级报告模板
+│   └── anti-patterns.md              # 反模式清单
+└── scripts/                          # 辅助工具脚本
+    ├── checklist_generator.py        # 任务清单生成器
+    ├── normalize_explain.py          # 执行计划归一化
+    └── sql_static_lint.py            # SQL 静态风险检查
 ```
 
-`SKILL.md` 只做纲要、触发和资源导航。详细规则放在 `references/`，脚本放在 `scripts/`。
+## 快速开始
 
-## 安装
+### 安装
 
-Codex 风格的本地 Skill 可以放到本地 skills 目录，例如：
+将 Skill 复制到本地 skills 目录：
 
 ```bash
+# Codex 风格
 cp -R sql-design ~/.codex/skills/sql-design
+
+# 其他 Agent 环境按各自机制引用
 ```
 
-Claude Code 或其他 Agent 环境可以按各自的 Skill、自定义指令或资源加载机制引用该目录。
-
-## 使用示例
+### 使用示例
 
 ```text
+# 审查 SQL 查询
 Use $sql-design to review this PostgreSQL query and suggest safe indexes, validation steps, and rollback.
-```
 
-```text
+# 设计新模块
 Use $sql-design to design the schema, indexes, migration, and ORM access layer for this new order module.
-```
 
-```text
+# 安全审计
 Use $sql-design to check whether this MyBatis dynamic SQL has SQL injection or tenant isolation risks.
 ```
 
-## 辅助脚本
+## 辅助工具
 
-### 生成任务清单
+### 1. 任务清单生成器
 
 ```bash
+# 优化模式
 scripts/checklist_generator.py --mode optimization --database postgres --orm MyBatis
-```
 
-```bash
+# 设计模式（JSON 输出）
 scripts/checklist_generator.py --mode design --database mysql --format json
 ```
 
-### 静态 SQL 风险检查
+### 2. SQL 静态风险检查
 
 ```bash
+# 检查文件
 scripts/sql_static_lint.py --dialect postgres path/to/query.sql
-```
 
-也可以从标准输入读取：
-
-```bash
+# 标准输入
 printf "SELECT * FROM users ORDER BY ${sort};" | scripts/sql_static_lint.py --dialect postgres
 ```
 
-该脚本会检查 `SELECT *`、无界查询、危险动态排序、字符串拼接 SQL、无 WHERE 的更新/删除、函数包裹索引列、深分页、DDL 风险等常见问题。
+**检测项**：`SELECT *`、无界查询、危险动态排序、字符串拼接 SQL、无 WHERE 更新/删除、函数包裹索引列、深分页、DDL 风险
 
-### 执行计划摘要归一化
+### 3. 执行计划归一化
 
 ```bash
+# 单文件处理
 scripts/normalize_explain.py --database postgres path/to/explain.txt
-```
 
-```bash
+# 自动检测数据库类型，JSON 输出
 scripts/normalize_explain.py --database auto --format json path/to/plan.txt
 ```
 
-该脚本不会替代 DBA 或 Agent 的判断，它只是把 PostgreSQL、MySQL、Oracle 或通用文本执行计划整理成便于审查的摘要，并标记顺序扫描、排序、临时空间、Nested Loop 和估算偏差等信号。
+**功能**：跨数据库（PostgreSQL/MySQL/Oracle）执行计划统一摘要，标记全表扫描、排序、临时空间、Nested Loop、估算偏差等信号
 
 ## 设计原则
 
-这个 Skill 应引导 Agent 输出可审计的工程结论：
+SQL Design 引导 Agent 输出**可审计的工程结论**，包含：
 
-- 已确认事实。
-- 假设和缺失证据。
-- 根因分析。
-- 推荐方案。
-- 安全风险。
-- 索引影响。
-- 锁和迁移风险。
-- 验证方案。
-- 回滚方案。
+1. **已确认事实** - 当前状态的客观描述
+2. **假设与缺失证据** - 需要验证的前提条件
+3. **根因分析** - 性能问题或安全风险的根本原因
+4. **推荐方案** - 具体可执行的优化措施
+5. **安全风险** - 潜在的安全隐患
+6. **索引影响** - 新增/修改索引的代价与收益
+7. **锁与迁移风险** - 生产变更的风险评估
+8. **验证方案** - 上线前的验证步骤
+9. **回滚方案** - 失败时的回滚策略
 
+## 贡献
+
+欢迎提交 Issue 和 Pull Request！
+
+### 贡献指南
+
+1. Fork 项目
+2. 创建功能分支 (`git checkout -b feature/xxx`)
+3. 提交更改 (`git commit -am 'Add xxx'`)
+4. 推送到分支 (`git push origin feature/xxx`)
+5. 创建 Pull Request
