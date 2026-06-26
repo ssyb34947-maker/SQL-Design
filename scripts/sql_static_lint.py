@@ -37,7 +37,7 @@ STRING_CONCAT_SQL = re.compile(
     r"(select|insert|update|delete|where|order\s+by)[^\n;]*(\+|\$\{|\{\{|f['\"]|format\(|concat\()",
     re.IGNORECASE,
 )
-SELECT_STAR = re.compile(r"\bselect\s+(?:distinct\s+)?\*\b", re.IGNORECASE)
+SELECT_STAR = re.compile(r"\bselect\s+(?:distinct\s+)?\*(?=\s|,|$)", re.IGNORECASE)
 OFFSET_WITHOUT_LIMIT = re.compile(r"\boffset\s+\d+\b(?![\s\S]*\blimit\b)", re.IGNORECASE)
 LARGE_OFFSET = re.compile(r"\boffset\s+([1-9]\d{3,})\b", re.IGNORECASE)
 UPDATE_OR_DELETE_NO_WHERE = re.compile(r"^\s*(update|delete\s+from)\b(?![\s\S]*\bwhere\b)", re.IGNORECASE)

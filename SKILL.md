@@ -56,6 +56,15 @@ Read:
 - MySQL: read `references/mysql.md` when the project uses MySQL, MariaDB, or InnoDB-specific behavior.
 - Oracle: read `references/oracle.md` when the project uses Oracle or enterprise systems that depend on CBO, AWR/ASH, hints, baselines, or Oracle partitioning.
 
+
+## Optional Scripts
+
+Use scripts only when they reduce repeated manual work or provide a quick first pass. They are heuristics, not database authority.
+
+- `scripts/checklist_generator.py`: generate an intake checklist for optimization or design tasks.
+- `scripts/sql_static_lint.py`: scan SQL text for common security, performance, and production-risk patterns.
+- `scripts/normalize_explain.py`: summarize PostgreSQL, MySQL, Oracle, or generic execution-plan text before deeper analysis.
+
 ## Output Requirements
 
 For optimization tasks, include:

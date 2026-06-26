@@ -25,8 +25,14 @@ class PlanNode:
     raw: str
 
 
-PG_NODE = re.compile(
-    r"(?P<node>[A-Z][A-Za-z ]+?)(?:\s+using\s+\S+)?(?:\s+on\s+(?P<relation>[\w.]+))?\s+"
+PG_NODE_WITH_RELATION = re.compile(
+    r"(?P<node>[A-Z][A-Za-z ]+?)(?:\s+using\s+\S+)?\s+on\s+(?P<relation>[\w.]+)\s+"
+    r"\(cost=(?P<cost>[^)]*?rows=(?P<est>\d+)[^)]*)\)"
+    r"(?:\s+\(actual\s+time=(?P<actual_time>[^)]*?rows=(?P<actual>\d+)[^)]*)\))?",
+    re.IGNORECASE,
+)
+PG_NODE_NO_RELATION = re.compile(
+    r"(?P<node>[A-Z][A-Za-z ]+?)\s+"
     r"\(cost=(?P<cost>[^)]*?rows=(?P<est>\d+)[^)]*)\)"
     r"(?:\s+\(actual\s+time=(?P<actual_time>[^)]*?rows=(?P<actual>\d+)[^)]*)\))?",
     re.IGNORECASE,
@@ -58,15 +64,23 @@ def detect_engine(text: str, requested: str) -> str:
 def parse_postgres(text: str) -> List[PlanNode]:
     nodes: List[PlanNode] = []
     for line_no, line in enumerate(text.splitlines(), start=1):
-        match = PG_NODE.search(line.replace("->", " "))
+        clean_line = line.replace("->", " ").strip()
+        match = PG_NODE_WITH_RELATION.search(clean_line) or PG_NODE_NO_RELATION.search(clean_line)
         if not match:
             continue
+        node_type = " ".join(match.group("node").split())
+        relation = match.groupdict().get("relation")
+        if relation is None:
+            relation_match = re.match(r"(?P<node>.+?)\s+on\s+(?P<relation>[\w.]+)$", node_type, re.IGNORECASE)
+            if relation_match:
+                node_type = relation_match.group("node")
+                relation = relation_match.group("relation")
         nodes.append(
             PlanNode(
                 engine="postgres",
                 line=line_no,
-                node_type=" ".join(match.group("node").split()),
-                relation=match.group("relation"),
+                node_type=node_type,
+                relation=relation,
                 estimated_rows=int(match.group("est")) if match.group("est") else None,
                 actual_rows=int(match.group("actual")) if match.group("actual") else None,
                 cost=match.group("cost"),
